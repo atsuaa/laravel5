@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\HelloMiddleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +16,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware([HelloMiddleware::class])->group(function ()
+{
+    Route::get('/hello', 'HellocController@index')->name('hello');
+    // Route::get('/hello/{id}', 'HellocController@index')->where('id', '[0-9]+');
+    Route::get('/hello/other', 'HellocController@other');
+});
+
+Route::namespace('Sample')->group(function ()
+{
+    Route::get('/sample', 'SampleController@index');
+    Route::get('/sample/other', 'SampleController@other');
+});
+
+Route::get('hello/{person}', 'HellocController@index');
