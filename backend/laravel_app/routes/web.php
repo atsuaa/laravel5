@@ -21,7 +21,7 @@ Route::middleware([HelloMiddleware::class])->group(function ()
 {
     Route::get('/hello', 'HellocController@index')->name('hello');
     // Route::get('/hello/{id}', 'HellocController@index')->where('id', '[0-9]+');
-    Route::get('/hello/other', 'HellocController@other');
+    Route::get('/hello/other/{msg}', 'HellocController@other');
 });
 
 Route::namespace('Sample')->group(function ()

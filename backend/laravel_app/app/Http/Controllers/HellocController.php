@@ -3,20 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HellocController extends Controller
 {
-    public function index(Request $request, $person)
+    private $f_name;
+
+    public function __construct()
     {
+        $this->f_name = 'sample.txt';
+    }
+
+    public function index()
+    {
+        $sample_msg = $this->f_name;
+        $sample_data = Storage::get($this->f_name);
         $data = [
-            'msg' => $person
+            'msg' => $sample_msg,
+            'data' => explode(PHP_EOL, $sample_data)
         ];
         return view('hello.index', $data);
     }
 
-    public function other()
+    public function other($msg)
     {
-        // リダイレクトレスポンスインスタンスを返す
+        Storage::append($this->f_name, $msg);
         return redirect()->route('hello');
     }
 }

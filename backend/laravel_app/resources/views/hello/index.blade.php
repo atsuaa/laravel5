@@ -5,7 +5,9 @@
         <title>Hello</title>
     </head>
     <body>
-        <p>word</p>
         <p>{{$msg}}</p>
+        @foreach($data as $line)
+        <p>{{$line}}</p>
+        @endforeach
     </body>
 </html>
